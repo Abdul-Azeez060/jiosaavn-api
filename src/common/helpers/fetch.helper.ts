@@ -27,11 +27,39 @@ export const useFetch = async <T>({ endpoint, params, context }: FetchParams): P
 
   const randomUserAgent = userAgents[Math.floor(Math.random() * userAgents.length)]
 
+  // Remove all JioSaavn/Sumit headers, only send minimal headers
   const response = await fetch(url.toString(), {
-    headers: { 'Content-Type': 'application/json', 'User-Agent': randomUserAgent }
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': randomUserAgent,
+      Accept: 'application/json, text/plain, */*',
+      'Accept-Language': 'en-US,en;q=0.9,*;q=0.8'
+    }
   })
 
-  const data = await response.json()
+  const body = await response.text()
 
-  return { data: data as T, ok: response.ok }
+  if (!response.ok) {
+    console.error('[useFetch] upstream request failed', {
+      endpoint,
+      status: response.status,
+      bodySnippet: body.slice(0, 200)
+    })
+
+    throw new Error(`upstream request failed with status ${response.status}`)
+  }
+
+  try {
+    const data = JSON.parse(body) as T
+
+    return { data, ok: response.ok }
+  } catch (error) {
+    console.error('[useFetch] failed to parse JSON payload', {
+      endpoint,
+      status: response.status,
+      bodySnippet: body.slice(0, 200)
+    })
+
+    throw error
+  }
 }

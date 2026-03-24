@@ -13,7 +13,7 @@ describe('ArtistController', () => {
 
   it('retrieve artist by link', async () => {
     const response = await artistController.controller.request(
-      '/artists?link=https://www.jiosaavn.com/artist/dua-lipa-songs/r-OWIKgpX2I_'
+      '/artists?link=https://example.com/artist/dua-lipa-songs/r-OWIKgpX2I_'
     )
 
     const { data } = (await response.json()) as { data: z.infer<typeof ArtistModel> }

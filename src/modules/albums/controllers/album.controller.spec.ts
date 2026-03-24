@@ -13,7 +13,7 @@ describe('AlbumController', () => {
 
   it('retrieve album by link', async () => {
     const response = await albumController.controller.request(
-      '/albums?link=https://www.jiosaavn.com/album/future-nostalgia/ITIyo-GDr7A_'
+      '/albums?link=https://example.com/album/future-nostalgia/ITIyo-GDr7A_'
     )
 
     const { data } = (await response.json()) as { data: z.infer<typeof AlbumModel> }

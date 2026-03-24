@@ -22,7 +22,7 @@ export class SongController implements Routes {
         path: '/songs',
         tags: ['Songs'],
         summary: 'Retrieve songs by ID or link',
-        description: 'Retrieve songs by a comma-separated list of IDs or by a direct link to the song on JioSaavn.',
+        description: 'Retrieve songs by a comma-separated list of IDs or by a direct link to the song.',
         operationId: 'getSongByIdsOrLink',
         request: {
           query: z.object({
@@ -36,12 +36,12 @@ export class SongController implements Routes {
               .string()
               .url()
               .optional()
-              .transform((value) => value?.match(/jiosaavn\.com\/song\/[^/]+\/([^/]+)$/)?.[1])
+              .transform((value) => value?.match(/song\/[^/]+\/([^/]+)$/)?.[1])
               .openapi({
                 title: 'Song Link',
-                description: 'A direct link to the song on JioSaavn',
+                description: 'A direct link to the song',
                 type: 'string',
-                example: 'https://www.jiosaavn.com/song/houdini/OgwhbhtDRwM'
+                example: 'https://example.com/song/houdini/OgwhbhtDRwM'
               })
           })
         },

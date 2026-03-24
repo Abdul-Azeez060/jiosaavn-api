@@ -1,11 +1,9 @@
 {
-  "name": "jiosaavn-api",
+  "name": "music-api",
   "version": "0.1.0",
-  "description": "Unofficial JioSaavn API",
+  "description": "music API",
   "type": "module",
   "license": "MIT",
-  "repository": "https://github.com/sumitkolhe/jiosaavn-api",
-  "author": "Sumit Kolhe",
   "main": "dist/server.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,20 +29,12 @@
     "start": "bun dist/server.js",
     "prebuild": "rm -rf dist",
     "build": "tsc && tsc-alias",
-    "format": "prettier --write \"./**/*.{js,ts,json}\"",
-    "lint": "eslint .",
-    "lint:fix": "bun run lint --fix",
-    "test": "vitest run",
     "test:ui": "vitest --ui",
     "deploy": "wrangler deploy",
     "prerelease": "bun run test",
     "release": "bun run changelogen --release --push",
     "spell-check": "cspell .",
     "postinstall": "npx simple-git-hooks"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "bun run lint && bun run format",
-    "commit-msg": "bun run commitlint --edit $1"
   },
   "dependencies": {
     "@hono/node-server": "^1.14.0",

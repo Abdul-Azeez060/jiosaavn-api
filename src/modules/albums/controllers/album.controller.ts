@@ -19,7 +19,7 @@ export class AlbumController implements Routes {
         path: '/albums',
         tags: ['Album'],
         summary: 'Retrieve an album by ID or link',
-        description: 'Retrieve an album by providing either an ID or a direct link to the album on JioSaavn.',
+        description: 'Retrieve an album by providing either an ID or a direct link to the album.',
         operationId: 'getAlbumByIdOrLink',
         request: {
           query: z.object({
@@ -34,13 +34,13 @@ export class AlbumController implements Routes {
               .string()
               .url()
               .optional()
-              .transform((value) => value?.match(/jiosaavn\.com\/album\/[^/]+\/([^/]+)$/)?.[1])
+              .transform((value) => value?.match(/album\/[^/]+\/([^/]+)$/)?.[1])
               .openapi({
                 title: 'Album Link',
-                description: 'A direct link to the album on JioSaavn',
+                description: 'A direct link to the album',
                 type: 'string',
-                example: 'https://www.jiosaavn.com/album/future-nostalgia/ITIyo-GDr7A_',
-                default: 'https://www.jiosaavn.com/album/future-nostalgia/ITIyo-GDr7A_'
+                example: 'https://example.com/album/future-nostalgia/ITIyo-GDr7A_',
+                default: 'https://example.com/album/future-nostalgia/ITIyo-GDr7A_'
               })
           })
         },

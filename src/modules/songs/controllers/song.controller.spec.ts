@@ -13,7 +13,7 @@ describe('SongController', () => {
 
   it('retrieve songs by link', async () => {
     const response = await searchController.controller.request(
-      '/songs?link=https://www.jiosaavn.com/song/houdini/OgwhbhtDRwM'
+      '/songs?link=https://example.com/song/houdini/OgwhbhtDRwM'
     )
 
     const { data } = (await response.json()) as { data: z.infer<typeof SongModel>[] }

@@ -34,12 +34,12 @@ export class ArtistController implements Routes {
               .string()
               .url()
               .optional()
-              .transform((value) => value?.match(/jiosaavn\.com\/artist\/[^/]+\/([^/]+)$/)?.[1])
+              .transform((value) => value?.match(/artist\/[^/]+\/([^/]+)$/)?.[1])
               .openapi({
                 title: 'Artist Link',
-                description: 'A direct link to the artist on JioSaavn',
+                description: 'A direct link to the artist',
                 type: 'string',
-                example: 'https://www.jiosaavn.com/artist/dua-lipa-songs/r-OWIKgpX2I_'
+                example: 'https://example.com/artist/dua-lipa-songs/r-OWIKgpX2I_'
               }),
             page: z.string().pipe(z.coerce.number()).optional().openapi({
               title: 'Page number',

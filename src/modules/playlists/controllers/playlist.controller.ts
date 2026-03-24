@@ -19,7 +19,7 @@ export class PlaylistController implements Routes {
         path: '/playlists',
         tags: ['Playlist'],
         summary: 'Retrieve a playlist by ID or link',
-        description: 'Retrieve a playlist by providing either an ID or a direct link to the playlist on JioSaavn.',
+        description: 'Retrieve a playlist by providing either an ID or a direct link to the playlist.',
         operationId: 'getPlaylistByIdOrLink',
         request: {
           query: z.object({
@@ -35,18 +35,16 @@ export class PlaylistController implements Routes {
               .url()
               .optional()
               .transform((value) => {
-                const matches = value?.match(
-                  /(?:jiosaavn\.com|saavn\.com)\/(?:featured|s\/playlist)\/[^/]+\/([^/]+)$|\/([^/]+)$/
-                )
+                const matches = value?.match(/(?:featured|s\/playlist)\/[^/]+\/([^/]+)$|\/([^/]+)$/)
                 const filteredMatches = matches?.filter((each) => each !== undefined)
                 return (filteredMatches && filteredMatches[filteredMatches?.length - 1 || 0]) || undefined
               })
               .openapi({
                 title: 'Playlist Link',
-                description: 'A direct link to the playlist on JioSaavn',
+                description: 'A direct link to the playlist',
                 type: 'string',
-                example: 'https://www.jiosaavn.com/featured/its-indie-english/AMoxtXyKHoU_',
-                default: 'https://www.jiosaavn.com/featured/its-indie-english/AMoxtXyKHoU_'
+                example: 'https://example.com/featured/its-indie-english/AMoxtXyKHoU_',
+                default: 'https://example.com/featured/its-indie-english/AMoxtXyKHoU_'
               }),
             page: z.string().pipe(z.coerce.number()).optional().openapi({
               title: 'Page Number',
