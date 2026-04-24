@@ -38,6 +38,7 @@ export class App {
           if (!origin) return null
           if (
             origin === 'https://listenfree.in' ||
+            origin === 'https://www.listenfree.in' ||
             origin === 'http://localhost:8080' ||
             origin === 'https://localhost:8080'
           ) {
